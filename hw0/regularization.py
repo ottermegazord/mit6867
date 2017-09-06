@@ -1,6 +1,7 @@
 #!/usr/bin/env/ python
 
 """
+
 SYNOPSIS
 
     Regularization
@@ -8,7 +9,6 @@ SYNOPSIS
 DESCRIPTION
 
     Given an n x n matrix C, add a scalar a to each diagonal entry of C
-
 """
 
 import numpy as np
@@ -16,9 +16,8 @@ import numpy as np
 
 rand_seed = input("Key in random seed: ")
 np.random.seed(rand_seed)
-x = input("key in axis 0 of C: ")
-y = input("key in axis 1 of C: ")
-C= np.random.rand(x,y)
+n = input("key in n of C: ")
+C= np.random.rand(n,n)
 
 print("Generating C...")
 print(C)
