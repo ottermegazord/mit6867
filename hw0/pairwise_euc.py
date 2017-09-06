@@ -18,7 +18,7 @@ DESCRIPTION
 
 
 import numpy as np
-from sklearn.metrics.pairwise import euclidean_distances
+import scipy.linalg as sp
 
 rand_seed = input("Key in random seed: ")
 np.random.seed(rand_seed)
@@ -34,5 +34,15 @@ print(Y)
 
 print("Calculating euclidean pairwise distances...")
 print("D = ")
-A = euclidean_distances(X, Y)
-print A
+
+# create zero Matrix D
+D = np.zeros((m,n))
+# sort row first, then column
+
+
+for j in range(n):
+    for i in range(m):
+        # D(i, j) = || x^i - y^j ||
+        D[i, j] = sp.norm(X[:,i] - Y[:,j])
+
+print D

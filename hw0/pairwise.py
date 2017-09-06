@@ -15,7 +15,6 @@ DESCRIPTION
 
 
 import numpy as np
-from sklearn.metrics import pairwise_distances
 
 rand_seed = input("Key in random seed: ")
 np.random.seed(rand_seed)
