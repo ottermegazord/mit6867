@@ -19,17 +19,17 @@ from sklearn.metrics import pairwise_distances
 
 rand_seed = input("Key in random seed: ")
 np.random.seed(rand_seed)
-x = np.random.rand(2, 1)
-y = np.random.rand(2, 1)
+m = input("key in length m: ")
+n = input("key in length n: ")
 
-print("Generating x, y...")
-print(x)
-print(y)
+x = np.random.rand(m, 1)
+y = np.random.rand(n, 1)
 
-print("Calculating pairwise distances...")
-print("A = ")
-A = pairwise_distances(x, y)
+A = x[:, np.newaxis] + y[np.newaxis, :]
+print "A = "
 print A
-B = np.linalg.norm(A)
-print("B = ")
-print(B)
+
+B = x[:, np.newaxis] * y [np.newaxis, :]
+print "B = "
+print B
+

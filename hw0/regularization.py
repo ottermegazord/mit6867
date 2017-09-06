@@ -23,5 +23,4 @@ print("Generating C...")
 print(C)
 
 a = input("Key in scalar for regularization: ")
-C[np.diag_indices_from(C)] += a
-print(C)
+print (C + a * np.eye(n))
