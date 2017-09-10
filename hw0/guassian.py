@@ -21,7 +21,10 @@ import matplotlib.pyplot as plt
 #generate Guassian distrubtion from parameters given
 
 u = [4,2]
-c = [[1,2] , [1.5,3]]
+c = [[1,1.5] , [1.5,3]]
 
 R = np.random.multivariate_normal(u, c, 1000)
+#R = np.random.multivariate_normal([4, 2], [[1, 1.5], [1.5,3]], 1000)
 print (R)
+plt.plot(*(zip(*R)),marker='.', ls = '')
+plt.show()
