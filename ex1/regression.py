@@ -80,16 +80,13 @@ def evaluate_algorithm(dataset, algorithm):
 
 #create data frame to store log values
 data = getData('Advertising.csv')
-x = data[:,0]
-y = data[:,3]
-plt.scatter(x, y)
-mean_x, mean_y = mean(x), mean(y)
-var_x, var_y = var(x, mean_x), var(y, mean_y)
-covar = cov(x, mean_x, y, mean_y)
-print mean_x, mean_y, var_x, var_y, covar
-b1, b0 = coefficients(data)
-print b1, b0
-rmse = evaluate_algorithm(data, simple_linear_regression)
-print rmse
+X = np.array(data[:,0:3])
+y = np.array(data[:,3])
+xTx = X.T.dot(X)
+XtX = np.linalg.inv(xTx)
+XtX_xT = XtX.dot(X.T)
+w = XtX_xT.dot(y)
+print w
+plt.scatter(X[:,0], y)
 plt.axis([0, 300, 0, 25])
 plt.show()
