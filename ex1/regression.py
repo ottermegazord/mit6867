@@ -20,73 +20,32 @@ import matplotlib.pyplot as plt
 import numpy as np
 import datetime
 import math
+import pandas as pd
 
 def getData(csvfile):
-    csv = np.genfromtxt(csvfile, delimiter=",")
-    csv = csv[1:,1:]
-    return csv
+    csv = pd.read_csv(csvfile, delimiter=",")
+    csv.insert(0, 'Ones', 1)
+    csv.drop(csv.columns[0], axis=1)
+    data = csv.loc[:,'TV': 'Sales':1]
+    data.insert(0, 'Ones', 1)
+    return data
 
-def mean(values):
-    return sum(values)/float(len(values))
-
-def var(values, mean):
-    return sum([(x-mean)**2 for x in values])
-
-def cov(x, mean_x, y, mean_y):
-    covariance = 0.0
-    for i in range(len(x)):
-        covariance += (x[i]- mean_x) * (y[i]-mean_y)
-    return covariance
-
-def coefficients(dataset):
-	x = [row[0] for row in dataset]
-	y = [row[1] for row in dataset]
-	x_mean, y_mean = mean(x), mean(y)
-	b1 = cov(x, x_mean, y, y_mean) / var(x, x_mean)
-	b0 = y_mean - b1 * x_mean
-	return [b0, b1]
-
-def simple_linear_regression(train, test):
-	predictions = list()
-	b0, b1 = coefficients(train)
-	for row in test:
-		yhat = b0 + b1 * row[0]
-		predictions.append(yhat)
-	return predictions
-
-
-# Calculate root mean squared error
-def rmse_metric(actual, predicted):
-    sum_error = 0.0
-    for i in range(len(actual)):
-        prediction_error = predicted[i] - actual[i]
-        sum_error += (prediction_error ** 2)
-    mean_error = sum_error / float(len(actual))
-    return math.sqrt(mean_error)
-
-
-# Evaluate regression algorithm on training dataset
-def evaluate_algorithm(dataset, algorithm):
-    test_set = list()
-    for row in dataset:
-        row_copy = list(row)
-        row_copy[-1] = None
-        test_set.append(row_copy)
-    predicted = algorithm(dataset, test_set)
-    print(predicted)
-    actual = [row[-1] for row in dataset]
-    rmse = rmse_metric(actual, predicted)
-    return rmse
 
 #create data frame to store log values
 data = getData('Advertising.csv')
-X = np.array(data[:,0:3])
-y = np.array(data[:,3])
+cols = data.shape[1]
+
+X = np.array(data.iloc[:, 0:4])
+y = np.array(data.iloc[:, 4])
+print y
+
 xTx = X.T.dot(X)
 XtX = np.linalg.inv(xTx)
 XtX_xT = XtX.dot(X.T)
-w = XtX_xT.dot(y)
-print w
-plt.scatter(X[:,0], y)
-plt.axis([0, 300, 0, 25])
-plt.show()
+theta = XtX_xT.dot(y)
+print theta
+#X = np.array(data[:,0:])
+#print X, y
+#plt.scatter(X[:,0], y)
+#plt.axis([0, 300, 0, 25])
+#plt.show()
