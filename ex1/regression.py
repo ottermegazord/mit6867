@@ -44,8 +44,8 @@ XtX = np.linalg.inv(xTx)
 XtX_xT = XtX.dot(X.T)
 theta = XtX_xT.dot(y)
 print theta
-#X = np.array(data[:,0:])
-#print X, y
-#plt.scatter(X[:,0], y)
-#plt.axis([0, 300, 0, 25])
-#plt.show()
+
+plt.plot(X[:,1], theta[1]*X[:,1] + theta[0])
+plt.scatter(X[:,1], y)
+plt.axis([0, 300, 0, 25])
+plt.show()
